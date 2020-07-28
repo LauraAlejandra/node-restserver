@@ -1,44 +1,32 @@
 require('./config/config');
 const express = require('express');
+const mongoose = require('mongoose');
+
 const app = express();
 const bodyParser = require('body-parser');
 
 //middleware: funciones que se van a disparar cuando pase el codigo
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
+app.use(require('./rutas/usuario'));
 
-app.get('/usuario', function(req, res) {
-    res.json('get usuario')
+/*
+await mongoose.connect('mongodb://localhost/my_database', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 });
+*/
 
-app.post('/usuario', function(req, res) { //crear nuevos registros
-    let body = req.body;
-    if (body.nombre === undefined) {
-        res.status(400).json({
-            ok: false,
-            mensaje: 'El nombre es necesario',
-
-        });
-    } else {
-        res.json({ persona: body });
-    }
-});
-
-//usamos put cuando queremos actualizar data
-app.put('/usuario/:id', function(req, res) { //crear nuevos registros
-    let id = req.params.id;
-    res.json({
-        id
-    });
-});
-
-app.delete('/usuario', function(req, res) { //crear nuevos registros
-    res.json('delete usuario');
+//el primer argumento viene de config.js
+//el segundo argumento es para que no nos saliera un error 
+mongoose.connect(process.env.URLDB, { useNewUrlParser: true, useCreateIndex: true }, (err, res) => {
+    if (err) throw err;
+    console.log('base de datos online');
 });
 
 app.listen(process.env.PORT, () => {
