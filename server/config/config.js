@@ -20,6 +20,9 @@ process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30;
 //para ver variables es heroku config
 process.env.SEED = process.env.SEED || 'este-es-el-seed-desarrollo';
 
+//GOOGLE CLIENT ID
+process.env.CLIENT_ID = process.env.CLIENT_ID || '975813396933-u6rngh8jkim53rcjea523gh3v3n0sg9t.apps.googleusercontent.com';
+
 //BASE DE DATOS
 let urlBD;
 if (process.env.NODE_ENV === 'dev') {
