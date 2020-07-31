@@ -11,7 +11,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'dev'; //si la variable process.e
 // 60 min
 // 24hrs
 //30 dias
-process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30;
+process.env.CADUCIDAD_TOKEN = '48h';
 
 //Seed de autentificación
 // creamos una variable SEED en heroku para produccion, si algo viene toma ese valor y si no es de desarrollo
